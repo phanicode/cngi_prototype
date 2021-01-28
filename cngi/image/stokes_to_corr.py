@@ -16,11 +16,40 @@ this module will be included in the api
 """
 
 def stokes_to_corr(img_dataset):
-    """
-    .. todo::
-        This function is not yet implemented
+    """Convert polarization data from Stokes parameters to the correlation basis.
     
-    Convert from Stokes basic (I,Q,U,V) to a specified correlation basis (XX,YY,XY,YX) or (RR,LL,LR,RL)
+     To be used as a converter during image reconstruction, and also stand-alone. 
 
-    To be used as a convertor during image reconstruction, and also stand-alone
+    Parameters
+    ----------
+    img_data : xarray.core.dataset.Dataset
+        Input image dataset (e.g., loaded from img.zarr file) with polarization data as Stokes (I,Q,U,V) parameters.
+
+    Returns
+    -------
+    xarray.core.dataset.Dataset
+        Output image dataset with polarization data in the linear (XX,XY,YX,YY) or circular (RR,RL,LR,LL) correlation basis.
+
+    See Also
+    --------
+    corr_to_stokes
+
+    Notes
+    -----
+    Polarization codes from the MeasurementSet are preserved in vis.zarr:
+    #. I
+    #. Q
+    #. U
+    #. V
+    #. RR
+    #. RL
+    #. LR
+    #. LL
+    #. XX
+    #. XY
+    #. YX
+    #. YY
+   
+    .. note::
+        Support is presently limited for heterogeneous-feed arrays with elements expected to be missing in a given basis (e.g., very long baseline interferometry with the Event Horizon Telescope).
     """
